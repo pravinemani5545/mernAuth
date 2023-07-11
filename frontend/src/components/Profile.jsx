@@ -1,3 +1,4 @@
+import Header from "./Header";
 import React, { useState, useEffect } from "react";
 import loginImg from "../assets/login.jpg";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -6,9 +7,8 @@ import { useRegisterMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
 import Loader from "./Loader";
-import Header from "./Header";
 
-export default function Register() {
+const Profile = () => {
   const [name, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -78,7 +78,7 @@ export default function Register() {
       </div>
     </>
   );
-}
+};
 
 const Form = ({
   name,
@@ -146,3 +146,5 @@ const Form = ({
     </div>
   );
 };
+
+export default Profile;
