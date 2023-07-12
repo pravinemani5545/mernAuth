@@ -54,7 +54,7 @@ export default function Login() {
           />
           {isLoading && <Loader />}
 
-          <div className="flex justify-between">
+          <div className="flex justify-between max-w-[400px] w-full mx-auto">
             <p className="flex items-center">
               <input className="mr-2" type="checkbox" /> Remember Me
             </p>
@@ -75,7 +75,7 @@ const Form = ({ email, setEmail, password, setPassword, label, onSubmit }) => {
         onSubmit={onSubmit}
         className="max-w-[400px] w-full mx-auto bg-white p-4"
       >
-        <h2 className="text-4xl font-bold text-center py-6">PUNDAI CORP.</h2>
+        <h2 className="text-4xl font-bold text-center py-6">Login</h2>
         <div className="flex flex-col py-2">
           <label>Email</label>
           <input

@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import loginImg from "../assets/login.jpg";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useRegisterMutation } from "../slices/usersApiSlice";
-import { setCredentials } from "../slices/authSlice";
+import { useUpdateUserMutation } from '../slices/usersApiSlice';
+import { setCredentials } from '../slices/authSlice';
 import { toast } from "react-toastify";
 import Loader from "./Loader";
 
@@ -17,7 +17,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [register, { isLoading }] = useRegisterMutation();
+  const [updateProfile, { isLoading }] = useUpdateUserMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -29,14 +29,18 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (password !== cfmPassword) {
-      toast.error("Passwords do not match");
+      toast.error('Passwords do not match');
     } else {
       try {
-        const res = await register({ name, email, password }).unwrap();
+        const res = await updateProfile({
+          _id: userInfo._id,
+          name,
+          email,
+          password,
+        }).unwrap();
         dispatch(setCredentials({ ...res }));
-        navigate("/");
+        toast.success('Profile updated successfully');
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
@@ -66,7 +70,7 @@ const Profile = () => {
             isLoading={isLoading}
           />
 
-          <div className="flex justify-between">
+          <div className="flex justify-between max-w-[400px] w-full mx-auto">
             <p className="flex items-center">
               <input className="mr-2" type="checkbox" /> Remember Me
             </p>
@@ -93,12 +97,12 @@ const Form = ({
   isLoading,
 }) => {
   return (
-    <div>
+    <>
       <form
         onSubmit={onSubmit}
         className="max-w-[400px] w-full mx-auto bg-white p-4"
       >
-        <h2 className="text-4xl font-bold text-center py-6">PUNDAI CORP.</h2>
+        <h2 className="text-4xl font-bold text-center py-6">Update Profile</h2>
         <div className="flex flex-col py-2">
           <label>Name</label>
           <input
@@ -143,7 +147,7 @@ const Form = ({
         </button>
       </form>
       {isLoading && <Loader />}
-    </div>
+    </>
   );
 };
 

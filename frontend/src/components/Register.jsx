@@ -66,7 +66,7 @@ export default function Register() {
             isLoading={isLoading}
           />
 
-          <div className="flex justify-between">
+          <div className="flex justify-between max-w-[400px] w-full mx-auto">
             <p className="flex items-center">
               <input className="mr-2" type="checkbox" /> Remember Me
             </p>
@@ -98,7 +98,7 @@ const Form = ({
         onSubmit={onSubmit}
         className="max-w-[400px] w-full mx-auto bg-white p-4"
       >
-        <h2 className="text-4xl font-bold text-center py-6">PUNDAI CORP.</h2>
+        <h2 className="text-4xl font-bold text-center py-6">Register</h2>
         <div className="flex flex-col py-2">
           <label>Name</label>
           <input
