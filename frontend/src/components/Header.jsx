@@ -89,7 +89,7 @@ export default function Header() {
   return (
     <header className="bg-white">
       <nav
-        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+        className="mx-auto flex max-w-7xl items-center justify-between p-3 lg:px-8"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
@@ -187,14 +187,14 @@ export default function Header() {
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            {userInfo ? (
-                <LoggedIn logoutHandler={logoutHandler} />
-              ) : (
-                <LoggedOut loginHandler={loginHandler} />
-          //       <button onClick={loginHandler} className="text-sm font-semibold leading-6 text-gray-900">
-          //   Log in <span aria-hidden="true">&rarr;</span>
-          // </button>
-              )}
+          {userInfo ? (
+            <LoggedIn logoutHandler={logoutHandler} />
+          ) : (
+            <LoggedOut loginHandler={loginHandler} />
+            //       <button onClick={loginHandler} className="text-sm font-semibold leading-6 text-gray-900">
+            //   Log in <span aria-hidden="true">&rarr;</span>
+            // </button>
+          )}
         </div>
       </nav>
       <Dialog
@@ -288,7 +288,7 @@ export default function Header() {
 //  userInfo, dispatch, navigate, ;
 const LoggedIn = ({ logoutHandler }) => {
   return (
-    <div className="py-6">
+    <div>
       <button
         className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
         onClick={logoutHandler}
@@ -301,7 +301,7 @@ const LoggedIn = ({ logoutHandler }) => {
 
 const LoggedOut = ({ loginHandler }) => {
   return (
-    <div className="py-6">
+    <div>
       <button
         className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
         onClick={loginHandler}

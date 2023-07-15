@@ -3,8 +3,8 @@ import React, { useState, useEffect } from "react";
 import loginImg from "../assets/login.jpg";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useUpdateUserMutation } from '../slices/usersApiSlice';
-import { setCredentials } from '../slices/authSlice';
+import { useUpdateUserMutation } from "../slices/usersApiSlice";
+import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
 import Loader from "./Loader";
 
@@ -21,16 +21,21 @@ const Profile = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     navigate("/profile");
+  //   }
+  // }, [navigate, userInfo]);
+
   useEffect(() => {
-    if (userInfo) {
-      navigate("/profile");
-    }
-  }, [navigate, userInfo]);
+    setUsername(userInfo.name);
+    setEmail(userInfo.email);
+  }, [userInfo.email, userInfo.name]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== cfmPassword) {
-      toast.error('Passwords do not match');
+      toast.error("Passwords do not match");
     } else {
       try {
         const res = await updateProfile({
@@ -40,7 +45,7 @@ const Profile = () => {
           password,
         }).unwrap();
         dispatch(setCredentials({ ...res }));
-        toast.success('Profile updated successfully');
+        toast.success("Profile updated successfully");
       } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
@@ -69,15 +74,6 @@ const Profile = () => {
             onSubmit={handleSubmit}
             isLoading={isLoading}
           />
-
-          <div className="flex justify-between max-w-[400px] w-full mx-auto">
-            <p className="flex items-center">
-              <input className="mr-2" type="checkbox" /> Remember Me
-            </p>
-            <NavLink to="/">
-              <p>Sign In</p>
-            </NavLink>
-          </div>
         </div>
       </div>
     </>
